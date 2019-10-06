@@ -14,8 +14,11 @@ import {
   Content,
   Header
 } from "native-base";
+import { propTypes } from "mobx-react";
+import { withNavigation } from "react-navigation";
 
-const Login = () => {
+const Login = props => {
+  // const { navigation } = props;
   return (
     <Content>
       <Header transparent />
@@ -49,10 +52,12 @@ const Login = () => {
             </Form>
           </Body>
         </ListItem>
-        <Button full success>
+        <Button full success
+          onPress={() => props.navigation.navigate("ListScreen")}>
           <Text>Login</Text>
         </Button>
-        <Button full warning>
+        <Button full warning
+          onPress={() => props.navigation.navigate("ListScreen")}>
           <Text>Register</Text>
         </Button>
       </List>
@@ -63,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default (Login);

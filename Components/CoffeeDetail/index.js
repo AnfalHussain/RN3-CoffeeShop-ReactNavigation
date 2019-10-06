@@ -21,6 +21,9 @@ import styles from "./styles";
 // Data
 import cafes from "../../data/cafes";
 
+//component 
+import CartIcon from "../CartIcon"
+
 class CoffeeDetail extends Component {
   state = {
     drink: "Cappuccino",
@@ -40,8 +43,11 @@ class CoffeeDetail extends Component {
   };
 
   render() {
+    const cafeId = this.props.navigation.getParam("cafeID")
+    const cafe = cafes.find(cafe => cafeId === cafe.id)
+
     if (!cafes) return <Content />;
-    const cafe = cafes[0];
+    // const cafe = cafes[0];
     return (
       <Content>
         <List>
@@ -85,7 +91,9 @@ class CoffeeDetail extends Component {
               </Picker>
             </Body>
           </ListItem>
-          <Button full danger>
+          <Button full danger
+          >
+            {/* onPress={() =>  } */}
             <Text>Add</Text>
           </Button>
         </List>
@@ -95,3 +103,15 @@ class CoffeeDetail extends Component {
 }
 
 export default observer(CoffeeDetail);
+
+CoffeeDetail.navigationOptions = ({ navigation }) => {
+  const cafeId = navigation.getParam("cafeID")
+  const cafe = cafes.find(cafe => cafeId === cafe.id)
+
+  return {
+    title: cafe.name,
+    headerRight: <CartIcon />,
+
+  }
+
+}
